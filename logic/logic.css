@@ -1,0 +1,43 @@
+/* ****
+ロジック
+とりあえずクラス名にプレフィックス`--logic-`を付ける
+**** */
+
+.--logic-grid-2-col {
+    margin-block-start: 1rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1em;
+    align-items: center;
+    justify-content: center;
+}
+
+.--logic-grid-3-col {
+    margin-block-start: 1rem;
+    display: grid;
+    grid-template-columns: 2fr 1fr 2fr;
+    column-gap: 1em;
+    align-items: center;
+    justify-content: center;
+}
+.--logic-grid-3-col > :nth-child(2) {
+    text-align: center;
+}
+.--logic-grid-3-col.--logic-right > :nth-child(2)::after,
+.--logic-grid-3-col.--logic-left > :nth-child(2)::after {
+    display: inline-block;
+    content: "";
+    background-size: contain;
+    inline-size: 2em;
+    block-size: 2em;
+}
+.--logic-grid-3-col.--logic-right > :nth-child(2)::after {
+    background-image: url("arrow-right.svg");
+}
+.--logic-grid-3-col.--logic-left > :nth-child(2)::after {
+    background-image: url("arrow-left.svg");
+}
+
+/* ***
+End of script
+*** */
