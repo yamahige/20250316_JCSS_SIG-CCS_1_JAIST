@@ -1,0 +1,818 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <title>人の問題解決プロセスの分析手法をコンピューターに適用する試み</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="slide.css">
+    <link rel="stylesheet" href="logic/logic.css">
+    <link rel="stylesheet" href="author.css">
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.9/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+  </head>
+  <body>
+    <h1 id="人の問題解決プロセスの分析手法をコンピューターに適用する試み">人の問題解決プロセスの分析手法をコンピューターに適用する試み</h1>
+    <section class="level3" aria-labelledby="著者">
+      <h3 class="author" id="著者">著者</h3>
+      <p>山口 琢(フリーランス)</p>
+      <p>大場 みち子(京都橘大学)</p>
+    </section>
+    <section class="level3" aria-labelledby="版">
+      <h3 class="version current" id="版">版</h3>
+      <section class="level4" aria-labelledby="版名">
+        <h4 class="version-name" id="版名">版名</h4>
+        <p>v1.1</p>
+      </section>
+      <section class="level4" aria-labelledby="日付">
+        <h4 class="date" id="日付">日付</h4>
+        <p>2025-03-24</p>
+      </section>
+    </section>
+    <section class="level3" aria-labelledby="版-1">
+      <h3 class="version" id="版-1">版</h3>
+      <section class="level4" aria-labelledby="版名-1">
+        <h4 class="version-name" id="版名-1">版名</h4>
+        <p>v1</p>
+      </section>
+      <section class="level4" aria-labelledby="日付-1">
+        <h4 class="date" id="日付-1">日付</h4>
+        <p>2025-03-17</p>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="はじめに">
+      <h2 id="はじめに">はじめに</h2>
+      <p>人の問題解決プロセス(特に読み書き)を測定・分析する研究をしてます:</p>
+      <ul>
+        <li>プロセスをデータ化/測定する手法: デジタル教材など</li>
+        <li>測定データを分析・評価する手法</li>
+      </ul>
+      <p>
+        <img src="figures/process-study-00.svg" class="fig-process" style="inline-size: 17rem;">
+      </p>
+      <p style="text-align: right;">以下は、研究会の趣旨に合っているでしょうか？…</p>
+    </section>
+    <section class="level2" aria-labelledby="プロセスの研究の進み方">
+      <h2 id="プロセスの研究の進み方">プロセスの研究の進み方</h2>
+      <p>プログラミングのプロセスを評価したい。</p>
+      <p>
+        <img src="figures/process-study-01.svg" class="fig-process">
+      </p>
+      <section class="level3" aria-labelledby="プロセスの研究">
+        <h3 id="プロセスの研究">プロセスの研究</h3>
+        <p>プログラミングのアプリを工夫してプロセスをデータ化</p>
+        <p>
+          <img src="figures/process-study-02.svg" class="fig-process">
+        </p>
+      </section>
+      <section class="level3" aria-labelledby="プロセスの研究-1">
+        <h3 id="プロセスの研究-1">プロセスの研究</h3>
+        <p>測定データを分析して推定する。</p>
+        <p>
+          <img src="figures/process-study-03.svg" class="fig-process">
+        </p>
+      </section>
+      <section class="level3" aria-labelledby="プロセスの研究-2">
+        <h3 id="プロセスの研究-2">プロセスの研究</h3>
+        <p>測定、分析、推定を評価</p>
+        <p>
+          <img src="figures/process-study-04.svg" class="fig-process">
+        </p>
+      </section>
+      <section class="level3" aria-labelledby="プロセスの研究-3">
+        <h3 id="プロセスの研究-3">プロセスの研究</h3>
+        <p>頭の中と答え合わせしたいが、できないので…</p>
+        <p>
+          <img src="figures/process-study-05.svg" class="fig-process">
+        </p>
+      </section>
+      <section class="level3" aria-labelledby="プロセスの研究-4">
+        <h3 id="プロセスの研究-4">プロセスの研究</h3>
+        <p>他のデータと答え合わせする。</p>
+        <p>
+          <img src="figures/process-study-06.svg" class="fig-process">
+        </p>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="今日のお題">
+      <h2 id="今日のお題">今日のお題</h2>
+      <p>アルゴリズムが分かっているコンピューターによる問題解決プロセスならば、直接答え合わせできるだろう。</p>
+      <p>
+        <img src="figures/process-study-08.svg" class="fig-process" style="inline-size: 20em;">
+      </p>
+      <section class="level3" aria-labelledby="アルゴリズムを可視化する教材">
+        <h3 id="アルゴリズムを可視化する教材">アルゴリズムを可視化する教材</h3>
+        <p>例えば「ソート 可視化」で検索すると、ソート・プロセスの進展に従ってソート対象が変化する様子を表示して、アルゴリズムの理解を助けるサイトが多数見つかる。</p>
+      </section>
+      <section class="level3" aria-labelledby="可視化教材の機能">
+        <h3 id="可視化教材の機能">可視化教材の機能</h3>
+        <p>外から見えるように(可視化)して、処理(アルゴリズム)の理解を助ける</p>
+        <figure class="--logic-grid-3-col --logic-right">
+          <div>
+            <ul>
+              <li>ソートって何をするの？入力と出力の関係</li>
+              <li>正解してるの？</li>
+              <li><em>どのように</em>解いているのか?</li>
+            </ul>
+          </div>
+          <div>可視化<br></div>
+          <div>
+            <img src="figures/visualized.svg" style="block-size: 9lh;">
+          </div>
+        </figure>
+      </section>
+      <section class="level3" aria-labelledby="今回のテーマ">
+        <h3 id="今回のテーマ">今回のテーマ</h3>
+        <p>逆をやる: 外から見えるモノからプロセスを推定</p>
+        <figure class="--logic-grid-3-col --logic-left">
+          <div>
+            <ul>
+              <li>何をしているか？入力と出力の関係</li>
+              <li>正解してるのか？</li>
+              <li>どのように解いているのか？</li>
+            </ul>
+          </div>
+          <div>推定<br></div>
+          <div>
+            <img src="figures/visualized.svg" style="block-size: 9lh;">
+          </div>
+        </figure>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="方法">
+      <h2 id="方法">方法</h2>
+      <p>問題としてはソートを取り上げて、いくつかの分析手法を試みる。</p>
+      <ul>
+        <li>
+          <p>題材: 数のソート</p>
+        </li>
+        <li>
+          <p>分析手法:</p>
+          <ul>
+            <li>何をしてるか？入力と出力の関係を調べる</li>
+            <li>正解してるのか？正答率を評価する</li>
+            <li>途中の解と<del>正解</del> <strong>最終的な解答</strong>との距離の変化の分析する<a id="fnref1" href="#fn1" class="footnote-ref" role="doc-noteref"><sup>1</sup></a></li>
+            <li>操作の時間的な共起(temporal co-occurrence)を分析する<a id="fnref2" href="#fn2" class="footnote-ref" role="doc-noteref"><sup>2</sup></a></li>
+            <li>解の状態遷移における閉路(cycle)を分析する<a id="fnref3" href="#fn3" class="footnote-ref" role="doc-noteref"><sup>3</sup></a> (今回はスキップ)</li>
+          </ul>
+        </li>
+        <li>
+          <p>検証: あるアルゴリズムで実現されている振る舞いを、別のアルゴリズムで説明できるか？</p>
+        </li>
+      </ul>
+      <section class="level3" aria-labelledby="方法--題材-ソート">
+        <h3 id="方法--題材-ソート">方法 > 題材: ソート</h3>
+        <p>入力する問題</p>
+        <ul>
+          <li>1から10の10個の数</li>
+          <li><span class="math inline" data-math-typeset="true">\({}_{10} \mathrm{ P }_{10} = 3,628,800\)</span> 種類の並びを入力とする</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="方法--題材-ソートのアルゴリズム">
+        <h3 id="方法--題材-ソートのアルゴリズム">方法 > 題材: ソートのアルゴリズム</h3>
+        <p>次のアルゴリズムを採用する。よく学習題材になるし、プログラミング言語によるコードが容易に見つかるので。</p>
+        <ul>
+          <li>バブルソート</li>
+          <li>クイックソート</li>
+          <li>ヒープソート</li>
+          <li>マージソート</li>
+          <li>選択ソート</li>
+          <li>挿入ソート</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="方法--題材-測定のタイミング">
+        <h3 id="方法--題材-測定のタイミング">方法 > 題材: 測定のタイミング</h3>
+        <p>状態遷移の<strong>状態</strong>はどこか？</p>
+        <table>
+          <thead>
+            <tr>
+              <th>アルゴリズム</th>
+              <th>状態</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>バブルソート</td>
+              <td>交換直後の並び</td>
+            </tr>
+            <tr>
+              <td>クイックソート</td>
+              <td>交換直後の並び</td>
+            </tr>
+            <tr>
+              <td>ヒープソート</td>
+              <td>交換直後の並び</td>
+            </tr>
+            <tr>
+              <td>選択ソート</td>
+              <td>交換直後の並び</td>
+            </tr>
+            <tr>
+              <td>マージソート</td>
+              <td>マージ直後の並び</td>
+            </tr>
+            <tr>
+              <td>挿入ソート</td>
+              <td>挿入直後の並び</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="手法-何をしているか">
+      <h2 id="手法-何をしているか">手法: 何をしているか？</h2>
+      <p>
+        どのアルゴリズムに、どの問題を与えても、
+        (1,2,3,4,5,6,7,8,9,10)
+        を出力する。
+      </p>
+      <section class="level4" aria-labelledby="分析結果">
+        <h4 id="分析結果">分析結果</h4>
+        <p>与えられた10個の数を昇順にソートしてる</p>
+      </section>
+      <section class="level4" aria-labelledby="検証">
+        <h4 id="検証">検証</h4>
+        <p>実際はヒープソートしていても、この結果をバブルソートで説明できる。</p>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="手法-正解なのか">
+      <h2 id="手法-正解なのか">手法: 正解なのか？</h2>
+      <p>「与えられた10個の数を昇順にソートしてる」とするならば、いつも正解してる。</p>
+      <section class="level4" aria-labelledby="分析結果-1">
+        <h4 id="分析結果-1">分析結果</h4>
+        <p>いつも正解してる、みんなが正答率100%、優秀である。</p>
+      </section>
+      <section class="level4" aria-labelledby="検証-1">
+        <h4 id="検証-1">検証</h4>
+        <p>実際はヒープソートしていても、この結果をバブルソートで説明できる。</p>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="手法-最終的な解答との距離の変化の分析">
+      <h2 id="手法-最終的な解答との距離の変化の分析">手法: 最終的な解答との距離の変化の分析</h2>
+      <p>解答との距離の変化の分析は、</p>
+      <ul>
+        <li>問題解決の過程で<strong>変化する解</strong>を記録し、</li>
+        <li><del>正解</del> <strong>最終的な解答</strong>との間に<strong>何らかの距離</strong>を適用して、</li>
+        <li>解くプロセスの時間経過に伴う距離の変化を分析し、</li>
+        <li>解答者の解き方などを推定する</li>
+      </ul>
+      <p>例えば、</p>
+      <blockquote>
+        <p><strong>推定</strong>:<br>途中で最終解答との<strong>距離が大きくなる</strong>ときには、<br><strong>解答者が迷っている</strong>と推定する</p>
+      </blockquote>
+      <section class="level3" aria-labelledby="最終解答との距離の変化の分析">
+        <h3 id="最終解答との距離の変化の分析">最終解答との距離の変化の分析</h3>
+        <p>
+          <img src="figures/process-study-07.svg" class="fig-process">
+        </p>
+      </section>
+      <section class="level3" aria-labelledby="距離-12">
+        <h3 id="距離-12">距離 1/2</h3>
+        <p>次の距離を採用する。レーベンシュタイン距離（編集距離）は研究でよく使われる。</p>
+        <ul>
+          <li>ハミング距離(Hamming distance)</li>
+          <li>レーベンシュタイン距離(Levenshtein distance)</li>
+          <li>ケイリー距離(Cayley distance)</li>
+          <li>ウラム距離(Ulam distance)</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="距離-22">
+        <h3 id="距離-22">距離 2/2</h3>
+        <p>各距離の説明:</p>
+        <ul>
+          <li>ハミング距離(Hamming distance)<br>2つの並びの同じ位置にあって異なる要素の個数である。<br><code>(2,5,3,1,4)</code>と<code>(1,2,3,4,5)</code>の距離は、3だけが同じで他は異なるので、4である。</li>
+          <li>レーベンシュタイン距離(Levenshtein distance)<br>1要素の挿入・削除・置換(その要素を任意の別の要素に置き換える)操作を何回繰り返すと、一方の並びから他方の並びへ変わるかの操作回数である。断りなく編集距離というとレーベンシュタイン距離を指すことが多い。</li>
+          <li>ケイリー距離(Cayley distance)<br>「交換」操作によってのみ並びを変換して、一方の並びから他方の並びにいたるまでの変換の最小回数を距離とする。</li>
+          <li>ウラム距離(Ulam distance)<br>スマホのUIなどのドラッグ&#x26;ドロップに該当する操作をして、目的の並びになるまでの最小の操作数</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="結果-状態遷移">
+        <h3 id="結果-状態遷移">結果: 状態遷移</h3>
+        <p>
+          <img src="figures/quick-distance-trace.png">
+        </p>
+        <ul>
+          <li><code>4 ##…</code>の4が最終解答との距離、<code>##…</code>の長さが目安</li>
+          <li><span style="color: red; text-decoration: underline;">下線で赤字</span>が操作された数</li>
+          <li>4つの距離について表示</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="結果-クイックソート">
+        <h3 id="結果-クイックソート">結果: クイックソート</h3>
+        <p>
+          <img src="figures/quick-distance-trace.png">
+        </p>
+        <ul>
+          <li>途中で遠ざかる場合がある</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="結果-ヒープソート">
+        <h3 id="結果-ヒープソート">結果: ヒープソート</h3>
+        <p>
+          <img src="figures/heap-distance-trace.png" style="inline-size: 25em;">
+        </p>
+        <ul>
+          <li>途中で遠ざかる場合がある</li>
+          <li>距離=0、すなわち最終解答に達した後でも、遠ざかる場合がある</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="結果">
+        <h3 id="結果">結果</h3>
+        <table class="result">
+          <thead>
+            <tr>
+              <td></td>
+              <th colspan="2">Levenshtein距離</th>
+              <th colspan="2">Hamming距離</th>
+              <th colspan="2">Caley距離</th>
+              <th colspan="2">Ulam距離</th>
+            </tr>
+            <tr>
+              <td></td>
+              <th>増加した問題数</th>
+              <th>割合</th>
+              <th>増加した問題数</th>
+              <th>割合</th>
+              <th>増加した問題数</th>
+              <th>割合</th>
+              <th>増加した問題数</th>
+              <th>割合</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th>バブルソート</th>
+              <td>2,743,264</td>
+              <td>75.6%</td>
+              <td>3,512,825</td>
+              <td>96.8%</td>
+              <td>3,624,619</td>
+              <td>99.9%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <th>ヒープソート</th>
+              <td>3,628,800</td>
+              <td>100.0%</td>
+              <td>3,628,800</td>
+              <td>100.0%</td>
+              <td>3,628,800</td>
+              <td>100.0%</td>
+              <td>3,628,800</td>
+              <td>100.0%</td>
+            </tr>
+            <tr>
+              <th>挿入ソート</th>
+              <td>1,339,176</td>
+              <td>36.9%</td>
+              <td>1,964,215</td>
+              <td>54.1%</td>
+              <td>3,443,878</td>
+              <td>94.9%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <th>マージソート</th>
+              <td>1,852,755</td>
+              <td>51.1%</td>
+              <td>2,432,789</td>
+              <td>67.0%</td>
+              <td>3,426,453</td>
+              <td>94.4%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <th>クイックソート</th>
+              <td>1,034,478</td>
+              <td>28.5%</td>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>1,089,872</td>
+              <td>30.0%</td>
+              <td>872,908</td>
+              <td>24.1%</td>
+            </tr>
+            <tr>
+              <th>選択ソート</th>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>解くプロセスの間に、最終解答との距離が増加した問題の数と、全問題数3.6M個に対する割合。</p>
+      </section>
+      <section class="level3" aria-labelledby="検証-2">
+        <h3 id="検証-2">検証</h3>
+        <table class="result">
+          <thead>
+            <tr>
+              <td></td>
+              <th colspan="2">Levenshtein距離</th>
+              <th colspan="2">Hamming距離</th>
+              <th colspan="2">Caley距離</th>
+              <th colspan="2">Ulam距離</th>
+            </tr>
+            <tr>
+              <td></td>
+              <th>増加した問題数</th>
+              <th>割合</th>
+              <th>増加した問題数</th>
+              <th>割合</th>
+              <th>増加した問題数</th>
+              <th>割合</th>
+              <th>増加した問題数</th>
+              <th>割合</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th class="em">バブルソート</th>
+              <td>2,743,264</td>
+              <td class="em">75.6%</td>
+              <td>3,512,825</td>
+              <td>96.8%</td>
+              <td>3,624,619</td>
+              <td>99.9%</td>
+              <td>0</td>
+              <td class="em">0.0%</td>
+            </tr>
+            <tr>
+              <th class="em">ヒープソート</th>
+              <td>3,628,800</td>
+              <td class="em">100.0%</td>
+              <td>3,628,800</td>
+              <td>100.0%</td>
+              <td>3,628,800</td>
+              <td>100.0%</td>
+              <td>3,628,800</td>
+              <td class="em">100.0%</td>
+            </tr>
+            <tr>
+              <th>挿入ソート</th>
+              <td>1,339,176</td>
+              <td>36.9%</td>
+              <td>1,964,215</td>
+              <td>54.1%</td>
+              <td>3,443,878</td>
+              <td>94.9%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <th>マージソート</th>
+              <td>1,852,755</td>
+              <td>51.1%</td>
+              <td>2,432,789</td>
+              <td>67.0%</td>
+              <td>3,426,453</td>
+              <td>94.4%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+            <tr>
+              <th>クイックソート</th>
+              <td>1,034,478</td>
+              <td>28.5%</td>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>1,089,872</td>
+              <td>30.0%</td>
+              <td>872,908</td>
+              <td>24.1%</td>
+            </tr>
+            <tr>
+              <th>選択ソート</th>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>0</td>
+              <td>0.0%</td>
+              <td>0</td>
+              <td>0.0%</td>
+            </tr>
+          </tbody>
+        </table>
+        <p>実際はヒープソートしている場合に、その結果(途中で最終解答から遠ざかる現象の発生頻度)をバブルソートで説明する…のは厳しいのではないか？</p>
+      </section>
+      <section class="level3" aria-labelledby="解答との距離の変化--考察">
+        <h3 id="解答との距離の変化--考察">解答との距離の変化 > 考察</h3>
+        <ul>
+          <li>ソートのプロセスでは必ずしも距離が減少(単調非増加)しない:
+            <ul>
+              <li>距離が広がることがあるし、</li>
+              <li>正解に達したにもかかわらず再び誤った順序に変わることすらある</li>
+            </ul>
+          </li>
+          <li>ソートアルゴリズムに<strong>迷い</strong>があるとは思えない</li>
+          <li>そこで、これが反例となって、解答との距離が遠ざかるからといって「迷ってる」とは、一般的には言えない</li>
+        </ul>
+        <p>しかし、</p>
+        <ul>
+          <li>途中で遠ざからない「アルゴリズム x 距離」の組み合わせもある</li>
+          <li>プロセスについて、距離から何らかの情報を引き出せるのではないか？</li>
+        </ul>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="手法-操作の時間的な共起">
+      <h2 id="手法-操作の時間的な共起">手法: 操作の時間的な共起</h2>
+      <p>操作の時間的な共起分析は、</p>
+      <ul>
+        <li>問題解決の過程で行われる操作について、</li>
+        <li>いくつかの操作が<strong>時間的に近くで行われる頻度</strong>を集計する<a id="fnref4" href="#fn4" class="footnote-ref" role="doc-noteref"><sup>4</sup></a>。</li>
+      </ul>
+      <p>このように集計する動機は、テキスト分析における語の共起と同様</p>
+      <p>ある複数の操作が頻繁に時間的に近くで行われるとき、それらの操作は</p>
+      <ul>
+        <li>何らかの定型操作であったり、</li>
+        <li>考え方の類似性の手がかりになったりする</li>
+      </ul>
+      <p>と解釈できる。</p>
+      <section class="level3" aria-labelledby="時間的共起の例-文章の並べ替え作文">
+        <h3 id="時間的共起の例-文章の並べ替え作文">時間的共起の例: 文章の並べ替え作文</h3>
+        <div style="display: grid; grid-template-columns: 1fr 1fr;">
+          <div>
+            <p>
+              <img src="figures/jigsaw-text-drag-and-drop.png" style="block-size: 15lh;">
+            </p>
+          </div>
+          <div>
+            <p>「ドラッグ&#x26;ドロップで並べ替えて、「オレオレ詐欺」の説明として、あなたが適切と思う文章を完成させなさい。」</p>
+            <p>文章では順番が重要ということを学ぶ教材<a id="fnref5" href="#fn5" class="footnote-ref" role="doc-noteref"><sup>5</sup></a><a id="fnref6" href="#fn6" class="footnote-ref" role="doc-noteref"><sup>6</sup></a><a id="fnref7" href="#fn7" class="footnote-ref" role="doc-noteref"><sup>7</sup></a><a id="fnref8" href="#fn8" class="footnote-ref" role="doc-noteref"><sup>8</sup></a></p>
+          </div>
+        </div>
+      </section>
+      <section class="level3" aria-labelledby="時間的共起の例-文章の並べ替え">
+        <h3 id="時間的共起の例-文章の並べ替え">時間的共起の例: 文章の並べ替え</h3>
+        <p>問題と時間的な共起行列</p>
+        <div class="--logic-grid-2-col" style="grid-template-columns: 3fr 2fr;">
+          <div>
+            <ul class="puzzle">
+              <li><span class="original_order">s2</span>相変わらず、オレオレ詐欺の被害が減らない。</li>
+              <li><span class="original_order">s3</span>オレオレ詐欺には、大きく分けて<em>2つの</em>種類がある。</li>
+              <li><span class="original_order">s4</span><em>ひとつは</em>、まさにオレオレ詐欺で、孫や甥などをかたって、金銭を要求する。</li>
+              <li><span class="original_order">s5</span><em>ひとつは</em>、官公庁や銀行を騙って、還付金があるとだまして現金自動預払機を操作させ、金銭をだまし取る。</li>
+              <li><span class="original_order">s6</span>この派生形として、口座が不正に操作されたとだまして、暗証番号を聞き出した上で、銀行カードもだまし取る。</li>
+              <li><span class="original_order">s7</span>このような被害を防ぐ最良の方法は、電話での金銭の要求や、銀行口座やクレジットカードに係わる電話があった場合は、まず、詐欺を疑い、家族や親しい人に相談することだ。</li>
+              <li><span class="original_order">s8</span>しかし、問題は、身近に相談できる人がいない高齢者が多くいることにあるのかもしれない。</li>
+            </ul>
+          </div>
+          <p>
+            <img src="figures/co-matrix-oreore.png" style="block-size: 8lh;">
+          </p>
+        </div>
+        <section class="level4" aria-labelledby="推定の例">
+          <h4 id="推定の例">推定の例</h4>
+          <p><code>s3</code>の次に<code>s4</code>を動かす回数が40回と多いのは、<code>s3</code>の「…2つの」と<code>s4</code>の「ひとつは…」を対応付けて考えるからではないか？</p>
+        </section>
+      </section>
+      <section class="level3" aria-labelledby="結果-ソート">
+        <h3 id="結果-ソート">結果: ソート</h3>
+        <p>ソートに時間的共起分析を適用</p>
+      </section>
+      <section class="level3" aria-labelledby="アルゴリズムb">
+        <h3 id="アルゴリズムb">アルゴリズムB</h3>
+        <p>
+          <img src="figures/co-matrix-bubble.png" style="block-size: 12lh;">
+        </p>
+        <ul>
+          <li>同じ数を続けて動かすことが多い</li>
+          <li>10は動かさない</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="アルゴリズムq">
+        <h3 id="アルゴリズムq">アルゴリズムQ</h3>
+        <p>
+          <img src="figures/co-matrix-quick.png" style="block-size: 12lh;">
+        </p>
+        <ul>
+          <li>「4の次に1」が多い</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="アルゴリズムh">
+        <h3 id="アルゴリズムh">アルゴリズムH</h3>
+        <p>
+          <img src="figures/co-matrix-heap.png" style="block-size: 12lh;">
+        </p>
+        <ul>
+          <li>次に1つ小さな数を動かすことが多い</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="アルゴリズムm">
+        <h3 id="アルゴリズムm">アルゴリズムM</h3>
+        <p>
+          <img src="figures/co-matrix-merge.png" style="block-size: 12lh;">
+        </p>
+        <ul>
+          <li>次に1つ大きな数を動かすことが多い</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="アルゴリズムs">
+        <h3 id="アルゴリズムs">アルゴリズムS</h3>
+        <p>
+          <img src="figures/co-matrix-selection.png" style="block-size: 12lh;">
+        </p>
+        <ul>
+          <li>次に1つ大きな数を動かすことが多い</li>
+          <li>次に1が動かされることが<strong>ない</strong></li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="アルゴリズムi">
+        <h3 id="アルゴリズムi">アルゴリズムI</h3>
+        <p>
+          <img src="figures/co-matrix-insertion.png" style="block-size: 12lh;">
+        </p>
+        <ul>
+          <li>同じ数を続けて動かさない</li>
+          <li>10を動かさない</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="答え合わせ-アルゴリズムb">
+        <h3 id="答え合わせ-アルゴリズムb">答え合わせ: アルゴリズムB</h3>
+        <p>
+          <img src="figures/co-matrix-bubble.png" style="block-size: 12lh;">
+        </p>
+        <p>バブルソート</p>
+        <ul>
+          <li>同じ数を続けて動かすことが多い</li>
+          <li>10は動かさない</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="答え合わせ-アルゴリズムq">
+        <h3 id="答え合わせ-アルゴリズムq">答え合わせ: アルゴリズムQ</h3>
+        <p>
+          <img src="figures/co-matrix-quick.png" style="block-size: 12lh;">
+        </p>
+        <p>クイックソート</p>
+        <ul>
+          <li>「4の次に1」が多い</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="答え合わせ-アルゴリズムh">
+        <h3 id="答え合わせ-アルゴリズムh">答え合わせ: アルゴリズムH</h3>
+        <p>
+          <img src="figures/co-matrix-heap.png" style="block-size: 12lh;">
+        </p>
+        <p>ヒープソート</p>
+        <ul>
+          <li>次に1つ小さな数を動かすことが多い</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="答え合わせ-アルゴリズムm">
+        <h3 id="答え合わせ-アルゴリズムm">答え合わせ: アルゴリズムM</h3>
+        <p>
+          <img src="figures/co-matrix-merge.png" style="block-size: 12lh;">
+        </p>
+        <p>マージソート</p>
+        <ul>
+          <li>次に1つ大きな数を動かすことが多い</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="答え合わせ-アルゴリズムs">
+        <h3 id="答え合わせ-アルゴリズムs">答え合わせ: アルゴリズムS</h3>
+        <p>
+          <img src="figures/co-matrix-selection.png" style="max-block-size: 35dvh;">
+        </p>
+        <p>選択ソート</p>
+        <ul>
+          <li>次に1つ大きな数を動かすことが多い</li>
+          <li>次に1が動かされることが<strong>ない</strong></li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="答え合わせ-アルゴリズムi">
+        <h3 id="答え合わせ-アルゴリズムi">答え合わせ: アルゴリズムI</h3>
+        <p>
+          <img src="figures/co-matrix-insertion.png" style="max-block-size: 35dvh;">
+        </p>
+        <p>挿入ソート</p>
+        <ul>
+          <li>同じ数を続けて動かさない</li>
+          <li>10を動かさない</li>
+        </ul>
+      </section>
+      <section class="level3" aria-labelledby="検証-3">
+        <h3 id="検証-3">検証</h3>
+        <div id="colloc-eval">
+          <figure>
+            <img src="figures/co-matrix-bubble-small.png" alt="バブルソート" class="em">
+            <figcaption aria-hidden="true">バブルソート</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/co-matrix-quick-small.png" alt="クイックソート">
+            <figcaption aria-hidden="true">クイックソート</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/co-matrix-heap-small.png" alt="ヒープソート" class="em">
+            <figcaption aria-hidden="true">ヒープソート</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/co-matrix-merge-small.png" alt="マージソート">
+            <figcaption aria-hidden="true">マージソート</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/co-matrix-selection-small.png" alt="選択ソート">
+            <figcaption aria-hidden="true">選択ソート</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/co-matrix-insertion-small.png" alt="挿入ソート">
+            <figcaption aria-hidden="true">挿入ソート</figcaption>
+          </figure>
+        </div>
+        <p>実際はヒープソートしている場合に、その結果(時間的な共起行列)をバブルソートで説明できるか …微妙</p>
+      </section>
+      <section class="level3" aria-labelledby="操作の時間的な共起--考察">
+        <h3 id="操作の時間的な共起--考察">操作の時間的な共起 > 考察</h3>
+        <p>時間的な共起分析は:</p>
+        <ul>
+          <li>ソート・アルゴリズムの特徴を表している:</li>
+          <li>アルゴリズムそのものまでは遠い…</li>
+        </ul>
+        <p>コンピューターによる整列はどれも正解するが、内部的なアルゴリズムが異なると、外から観察できる並べ替え操作が異なって表現できた。</p>
+      </section>
+    </section>
+    <section class="level2" aria-labelledby="全体の考察-正解の存在">
+      <h2 id="全体の考察-正解の存在">全体の考察: 正解の存在</h2>
+      <p>分析手法にとっての<strong>正解</strong>の存在</p>
+      <ul>
+        <li>唯一の正解が必要</li>
+        <li>正解が複数存在してもよい</li>
+        <li>正解が誰にも分からなくてもよい</li>
+        <li>正解が存在しなくてもよい</li>
+        <li>正解は20年後に分かるが今判断する必要があり、その判断を今評価したい</li>
+      </ul>
+      <p>正解を前提としない分析</p>
+      <ul>
+        <li>途中の解と最終的な解答との距離の変化の分析</li>
+        <li>操作の時間的な共起</li>
+        <li>状態遷移の閉路(今回はスキップ)</li>
+      </ul>
+    </section>
+    <section class="level2" aria-labelledby="全体の考察-このような研究の意義">
+      <h2 id="全体の考察-このような研究の意義">全体の考察: このような研究の意義</h2>
+      <ul>
+        <li>
+          <p>学校教育</p>
+          <ul>
+            <li>「答えのない課題解決に挑む」人材の育成<a id="fnref9" href="#fn9" class="footnote-ref" role="doc-noteref"><sup>9</sup></a></li>
+            <li>試行錯誤の検出、内容の評価<a id="fnref10" href="#fn10" class="footnote-ref" role="doc-noteref"><sup>10</sup></a></li>
+          </ul>
+        </li>
+        <li>
+          <p>オフィス・アプリケーション</p>
+          <ul>
+            <li>情報の一貫性(coherence)、整合性(consistency)をもたらそうとする<strong>操作</strong>に基づく品質評価。望ましい行動。<br>vs. アウトプットの品質</li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+    <section class="level2" aria-labelledby="不良設定問題">
+      <h2 id="不良設定問題">不良設定問題</h2>
+      <ul>
+        <li>プロセスの分析が<strong>正解の存在を前提としない</strong>ことを示した</li>
+        <li>「解き方の選択」も出力と考えれば、入力に対する出力を分析するというスキームは、いぜんとして維持される。</li>
+        <li>そのうえで、「解き方の選択に正解はない」はありえるだろう。</li>
+      </ul>
+    </section>
+    <section class="level2" aria-labelledby="今後の面白そうなテーマ">
+      <h2 id="今後の面白そうなテーマ">今後の面白そうなテーマ</h2>
+      <p>
+        <img src="figures/process-study-09.svg" class="fig-process right" style="inline-size: 17rem;">
+      </p>
+      <ul>
+        <li>他の問題: 人にも解けて、(既知のアルゴリズムで)コンピューターにも解ける
+          <ul>
+            <li>15パズル、解けない問題もある</li>
+            <li>ハノイの塔</li>
+            <li>上達すると、<strong>その人にとっての距離</strong>が変わる…<br>その人にとっての距離の変化 ∈ <strong>理解</strong><br>…かも</li>
+          </ul>
+        </li>
+        <li>言語モデルに「オレオレ詐欺」を解かせる</li>
+      </ul><!--
+      Web Publication (WebPub) Format
+      $ vivliostyle build slide.md -o web/ -f webpub
+      -->
+    </section>
+    <section class="footnotes" role="doc-endnotes">
+      <hr>
+      <ol>
+        <li id="fn1" role="doc-endnote">山口 琢, 大場 みち子, コンピュータの整列処理で正解との距離は単調に減少するか?, 情報処理学会 研究報告コンピュータと教育(CE),2020-CE-157(6),1-8 (2020-10-31) , 2188-8930 <a class="url" href="http://id.nii.ac.jp/1001/00207490/">http://id.nii.ac.jp/1001/00207490/</a><a href="#fnref1" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn2" role="doc-endnote">山口琢, 大場みち子, コンピューターの整列処理におけるデータ操作の時間的共起分析, 情報処理学会 研究報告コンピュータと教育(CE), Vol. 2020-CE-156, No. 1 pp.1—7, 2020-08-22 <a class="url" href="http://id.nii.ac.jp/1001/00206288/">http://id.nii.ac.jp/1001/00206288/</a><a href="#fnref2" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn3" role="doc-endnote">Yamaguchi, T., Matsuzawa, Y., Niimi, A., Oba, M. (2023). Cycles in State Transition as Trial-and-Errors in Solving Programming Exercises. In: Keane, T., Lewin, C., Brinda, T., Bottino, R. (eds) Towards a Collaborative Society Through Creative Learning. WCCE 2022. IFIP Advances in Information and Communication Technology, vol 685. Springer, Cham. <a class="url" href="https://doi.org/10.1007/978-3-031-43393-1_49">https://doi.org/10.1007/978-3-031-43393-1_49</a><a href="#fnref3" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn4" role="doc-endnote">山口 琢, 大場 みち子, 編集操作の時間的共起分析の提案, 情報処理学会 研究報告コンピュータと教育（CE）,2019-CE-151(9),1-7 (2019-09-28), 2188-8930 <a class="url" href="http://id.nii.ac.jp/1001/00199567/">http://id.nii.ac.jp/1001/00199567/</a><a href="#fnref4" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn5" role="doc-endnote">山口 琢, 大場 みち子, 高橋 慈子, 小林 龍生, ジグソー・テキストによる文並べ替え操作の測定, 情報処理学会 研究報告コンピュータと教育(CE), 2017-CE-142(27),1-6, 2017 <a class="url" href="http://id.nii.ac.jp/1001/00184931/">http://id.nii.ac.jp/1001/00184931/</a><a href="#fnref5" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn6" role="doc-endnote">林 浩一, 山口 琢, 大場 みち子, ロジカルシンキングにおける基本的関係についてのジグソー・テキストを用いた理解度評価, 情報処理学会 研究報告コンピュータと教育(CE), 2019-CE-151(13),1-8 (2019-09-28) , 2188-8930 <a class="url" href="http://id.nii.ac.jp/1001/00199571/">http://id.nii.ac.jp/1001/00199571/</a><a href="#fnref6" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn7" role="doc-endnote">西村 萌, 米澤 彩乃, 松澤 芳昭, パズル型プログラミング問題を利用した初学者の迷いや思考プロセスの個別分析の試み, 情報処理学会 研究報告コンピュータと教育(CE), 2023-CE-169(10),1-8 (2023-03-04) , 2188-8930 <a class="url" href="http://id.nii.ac.jp/1001/00225009/">http://id.nii.ac.jp/1001/00225009/</a><a href="#fnref7" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn8" role="doc-endnote">歌田 夢香, 加藤 輝実, 山口 琢, 大場 みち子, 新美 礼彦, アジャイル開発におけるプロダクトオーナー育成支援 ワークショップの実践, 実践的IT教育シンポジウム rePiT 論文集, 2024, 2024 巻, 第10回 実践的IT教育シンポジウム rePiT2024 in 京都, p. 35-42, 公開日 2024/03/07 <a class="url" href="https://doi.org/10.11309/repit.2024.0_35">https://doi.org/10.11309/repit.2024.0_35</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn9" role="doc-endnote">中央教育審議会：幼稚園、小学校、中学校、高等学校及び特別支援学校の学習指導要領等の改善及び必要な方策等について(答申)(中教審第197号)、p.10、文部科学省（オンライン）<a class="url" href="https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo0/toushin/1380731.htm">https://www.mext.go.jp/b_menu/shingi/chukyo/chukyo0/toushin/1380731.htm</a><a href="#fnref9" class="footnote-back" role="doc-backlink">↩</a></li>
+        <li id="fn10" role="doc-endnote">国立教育政策研究所 教育課程研究センター：「指導と評価の一体化」のための学習評価に関する参考資料(高等学校編) 情報、pp.54-59、（オンライン）、入手先<a class="url" href="https://www.nier.go.jp/kaihatsu/shidousiryou.html">https://www.nier.go.jp/kaihatsu/shidousiryou.html</a><a href="#fnref10" class="footnote-back" role="doc-backlink">↩</a></li>
+      </ol>
+    </section>
+  </body>
+</html>
